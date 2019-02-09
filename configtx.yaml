@@ -64,7 +64,7 @@ Organizations:
                 Rule: "OR('Org1MSP.member')"
             Admins:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin')"
+                Rule: "OR('Org1MSP.member')"
 
 ################################################################################
 #
@@ -166,6 +166,9 @@ Channel: &ChannelDefaults
         Admins:
             Type: ImplicitMeta
             Rule: "ANY Admins"
+        ChannelCreationPolicy:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
 
     # Capabilities describes the channel level capabilities, see the
     # dedicated Capabilities section elsewhere in this file for a full
@@ -253,7 +256,6 @@ Application: &ApplicationDefaults
     # Organizations is the list of orgs which are defined as participants on
     # the application side of the network.
     Organizations:
-        - *Orderer
         - *Org1
 
     # Policies defines the set of policies at this level of the config tree
@@ -303,7 +305,6 @@ Profiles:
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Orderer
                 - *Org1
             Capabilities:
                 <<: *ApplicationCapabilities
